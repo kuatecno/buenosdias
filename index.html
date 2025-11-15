@@ -51,36 +51,40 @@
         text-transform: uppercase;
       }
 
-      nav {
+      .section-nav {
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        padding: 0.25rem clamp(1.5rem, 4vw, 4rem) 1rem;
+        padding: 1rem clamp(1.5rem, 4vw, 4rem);
+        border-bottom: 1px solid rgba(11, 12, 17, 0.08);
+        background: var(--porcelain);
       }
 
-      nav a {
-        font-family: 'Playfair Display', serif;
+      .section-nav a {
+        font-family: 'Space Grotesk', sans-serif;
         text-decoration: none;
         color: var(--ink);
-        font-size: 0.95rem;
-        letter-spacing: 0.05em;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
         position: relative;
+        padding-bottom: 0.25rem;
       }
 
-      nav a::after {
+      .section-nav a::after {
         content: '';
         position: absolute;
-        bottom: -4px;
+        bottom: 0;
         left: 0;
         width: 100%;
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--magenta-punch));
+        background: var(--ink);
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 250ms ease;
       }
 
-      nav a:hover::after {
+      .section-nav a:hover::after {
         transform: scaleX(1);
       }
 
@@ -130,8 +134,7 @@
 
       .brand-banner {
         text-align: center;
-        padding: 1.5rem clamp(1.5rem, 4vw, 4rem) 2rem;
-        border-bottom: 1px solid rgba(11, 12, 17, 0.08);
+        padding: 1.5rem clamp(1.5rem, 4vw, 4rem) 1rem;
         background: var(--porcelain);
       }
 
@@ -394,11 +397,9 @@
       }
 
       @media (max-width: 720px) {
-        nav {
+        .section-nav {
           flex-wrap: wrap;
-        }
-        .pulse-btn {
-          width: 100%;
+          gap: 1rem;
         }
         .lead-title {
           font-size: 1.8rem;
@@ -415,15 +416,6 @@
         <span>Friday • November 14, 2025</span>
         <span>Dow +0.83%</span>
       </div>
-      <nav>
-        <a href="#">U.S.</a>
-        <a href="#">World</a>
-        <a href="#">Culture</a>
-        <a href="#">Future</a>
-        <a href="#">Audio</a>
-        <a href="#">Opinión</a>
-        <button class="pulse-btn">Pulse Edition</button>
-      </nav>
     </header>
 
     <div class="ticker">
@@ -441,6 +433,15 @@
       <h1 class="brand-name">Buenos Días</h1>
       <p class="brand-subline">Edición Internacional</p>
     </div>
+
+    <nav class="section-nav">
+      <a href="#">U.S.</a>
+      <a href="#">World</a>
+      <a href="#">Culture</a>
+      <a href="#">Future</a>
+      <a href="#">Audio</a>
+      <a href="#">Opinión</a>
+    </nav>
 
     <div class="promo-banner">
       <strong>Give a gift worth talking about.</strong> Give a year of Buenos Días, plus a free tote.
