@@ -224,17 +224,19 @@ app.post('/api/admin/scrape', async (req, res) => {
     // Trigger manual scrape
     const { spawn } = require('child_process');
     // Set LIMIT=50 environment variable for the scrape process
-    const scrapeProcess = spawn('npm', ['run', 'scrape:all'], {
+    // Use node directly instead of npm to avoid PATH issues
+    const scrapeProcess = spawn(process.execPath, ['api/scrape-all.js'], {
       cwd: __dirname,
       detached: true,
-      env: { ...process.env, LIMIT: '50' }
+      env: { ...process.env, LIMIT: '50' },
+      stdio: 'ignore'
     });
     
     scrapeProcess.unref();
     res.json({ success: true, message: 'Scraping started in background' });
   } catch (err) {
     console.error('Error triggering scrape:', err);
-    res.status(500).json({ error: 'Failed to start scraping' });
+    res.status(500).json({ error: 'Failed to start scraping: ' + err.message });
   }
 });
 
@@ -242,9 +244,10 @@ app.post('/api/admin/ai-process', async (req, res) => {
   try {
     // Trigger AI processing
     const { spawn } = require('child_process');
-    const aiProcess = spawn('npm', ['run', 'ai:select'], {
+    const aiProcess = spawn(process.execPath, ['ai/select-and-generate.js'], {
       cwd: __dirname,
-      detached: true
+      detached: true,
+      stdio: 'ignore'
     });
     
     aiProcess.unref();
@@ -384,9 +387,10 @@ app.post('/api/ai/regenerate', async (req, res) => {
   try {
     // Trigger AI regeneration
     const { spawn } = require('child_process');
-    const aiProcess = spawn('npm', ['run', 'ai:select'], {
+    const aiProcess = spawn(process.execPath, ['ai/select-and-generate.js'], {
       cwd: __dirname,
-      detached: true
+      detached: true,
+      stdio: 'ignore'
     });
     
     aiProcess.unref();
